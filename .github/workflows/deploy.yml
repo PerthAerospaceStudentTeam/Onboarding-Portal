@@ -14,6 +14,7 @@ permissions:
 jobs:
   deploy-backend:
     runs-on: ubuntu-latest
+    environment: prod
     steps:
       - uses: actions/checkout@v4
 
@@ -42,6 +43,7 @@ jobs:
 
   deploy-frontend:
     runs-on: ubuntu-latest
+    environment: prod
     steps:
       - uses: actions/checkout@v4
 
