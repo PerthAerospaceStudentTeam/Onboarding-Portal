@@ -1,0 +1,18 @@
+.btn{
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    padding: var(--space-1) var(--space-2);
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.btn-primary{
+    background-color: var(--color-button);
+    color: white;
+}
+
+.btn-primary:hover{
+    background-color: var(--color-info);
+}

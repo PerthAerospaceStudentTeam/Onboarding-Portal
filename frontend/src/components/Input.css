@@ -1,0 +1,12 @@
+.input{
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    padding: var(--space-1) var(--space-2);
+    border: 1px solid var(--color-gray);
+    border-radius: var(--radius-sm);
+    outline: none;
+}
+
+.input:focus{
+    border-color: var(--color-primary-blue);
+}
