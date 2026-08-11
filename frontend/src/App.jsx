@@ -1,8 +1,20 @@
+import { useState } from "react";
+import "./theme.css"; 
+import "./index.css";
+import AdminPanel from "./AdminPanel";
+import RecruitsDetails from "./RecruitsDetails";
+
+
 export default function App() {
-  return (
+  const[selectedCandidateId, setSelectedCandidateId] = useState(null);
+
+  return(
     <main>
-      <h1>Onboarding Portal</h1>
-      <p>Starter React app.</p>
+      {selectedCandidateId === null ? (
+        <AdminPanel onViewCandidate={(id) => setSelectedCandidateId(id)}/>
+      ) : (
+        <RecruitsDetails candidateId={selectedCandidateId} onBack={() => setSelectedCandidateId(null)} />
+      )}
     </main>
-  )
+  );
 }
