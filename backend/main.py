@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
 from config import get_settings
+from api.user_import import router as user_import_router
 
 settings = get_settings()
 
@@ -15,6 +15,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(user_import_router)
 
 @app.get("/health")
 def health():
