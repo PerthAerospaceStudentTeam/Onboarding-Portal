@@ -75,7 +75,7 @@ resource backend 'Microsoft.App/containerApps@2026-01-01' = {
 
 resource frontend 'Microsoft.Web/staticSites@2025-03-01' = {
   name: '${appName}-frontend'
-  location: location
+  location: 'eastasia'
   sku: { name: 'Free' }
   properties: {
     buildProperties: {
