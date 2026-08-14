@@ -1,2 +1,2 @@
-name,email,department,application-rating
-John Doe,johndoe@email.com,mechanical,5
+first-name,last-name,email,department,application-rating
+John,Doe,johndoe@email.com,mechanical,5
