@@ -1,0 +1,20 @@
+.table{
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+}
+
+.table th{
+    text-align: left;
+    padding: var(--space-2);
+    border-bottom: 2px solid var(--color-gray);
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-body);
+    text-transform: uppercase;
+}
+
+.table td{
+    padding: var(--space-2);
+    border-bottom: 1px solid var(--color-gray);
+}
