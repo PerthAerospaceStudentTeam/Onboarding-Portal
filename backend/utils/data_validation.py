@@ -2,6 +2,24 @@ import pandas as pd
 import re
 
 
+def validate_columns(file):
+    required_columns = [
+        "first-name",
+        "last-name",
+        "email",
+        "department",
+        "application-rating"
+    ]
+
+    missing_columns = []
+
+    for column in required_columns:
+        if column not in file.columns:
+            missing_columns.append(column)
+
+    return missing_columns
+
+
 def validate_name(name):
     valid = True
     error_msg = ""
