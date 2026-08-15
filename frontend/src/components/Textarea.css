@@ -1,0 +1,22 @@
+.textarea {
+    width: 100%;
+    background-color: var(--color-offwhite, #F5F5F5);
+    border: 1px solid var(--color-gray, #B3B3B3);
+    border-radius: 10px;
+    padding:14px 16px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--color-primary-blue, #0E2033);
+    resize: vertical;
+    min-height: 90px;
+}
+
+.textarea-placeholder {
+    color: var(--color-darkgray, #9A9898);
+    font-style: italic;
+}
+
+.textarea:focus {
+    outline: none;
+    border-color: var(--color-primary-blue, #0E2033);
+}

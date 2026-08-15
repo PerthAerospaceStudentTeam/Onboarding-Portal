@@ -9,7 +9,7 @@
     text-align: left;
     padding: var(--space-2);
     border-bottom: 2px solid var(--color-gray);
-    color: var(--color-dark-gray);
+    color: var(--color-primary-blue);
     font-size: var(--font-size-body);
     text-transform: uppercase;
 }

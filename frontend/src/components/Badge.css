@@ -2,8 +2,8 @@
     display: inline-block;
     font-family: var(--font-family);
     font-size: var(--font-size-caption);
-    padding: 4px 10px;
-    border-radius: 999px;
+    padding: 8px 16px;
+    border-radius: 10px;
     font-weight: 400;
 }
 
@@ -19,6 +19,16 @@
 
 .badge-error{
     background-color: var(--color-error);
+    color: white;
+}
+
+.badge-info{
+    background-color: var(--color-info);
+    color: white;
+}
+
+.badge-basic{
+    background-color: var(--color-primary-blue);
     color: white;
 }
 

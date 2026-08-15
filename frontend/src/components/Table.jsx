@@ -13,7 +13,7 @@ export function Table({ candidates = [], selectedIds = [], onToggleSelect, onVie
                     <th>Team</th>
                     <th>Stage</th>
                     <th>Attendance</th>
-                    <th></th>
+                    <th>Action</th>
                 </tr>
             </thead>
 
@@ -29,11 +29,11 @@ export function Table({ candidates = [], selectedIds = [], onToggleSelect, onVie
                         <td>{candidate.name}</td>
                         <td>{candidate.team}</td>
                         <td>
-                            <Badge variant={candidate.stageVariant}>{candidate.stage}</Badge>
+                            <Badge stage={candidate.stage}/>
                         </td>
-                        <td>{candidate.attendence}</td>
+                        <td>{candidate.attendance}</td>
                         <td>
-                            <Button variant="secondary" onClick={() => onViewDetails(candidate.id)}>
+                            <Button variant="primary" onClick={() => onViewDetails(candidate.id)}>
                                 View Details 
                             </Button>
                         </td>

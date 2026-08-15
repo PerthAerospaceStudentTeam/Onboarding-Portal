@@ -1,14 +1,21 @@
-* {
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  font-family: system-ui, sans-serif;
+/* to span the full browser window instead of the default phone one  */
+html, 
+body, 
+#root, 
+main {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important; 
 }
 
-main {
-  max-width: 40rem;
-  margin: 2rem auto;
-  padding: 0 1rem;
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: var(--color-offwhite, #F5F5F5);
 }
