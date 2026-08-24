@@ -1,22 +1,14 @@
 import pandas as pd
 import re
 
-def standardise_user(user):
-    user["first-name"] = str(user["first-name"]).strip().title()
-    user["last-name"] = str(user["last-name"]).strip().title()
-    user["email"] = str(user["email"]).strip().lower()
-    user["department"] = str(user["department"]).strip().lower()
-
-    return user
-
 
 def validate_columns(file):
     required_columns = [
-        "first-name",
-        "last-name",
+        "first_name",
+        "last_name",
         "email",
         "department",
-        "onboarding-score"
+        "onboarding_score"
     ]
 
     missing_columns = []
@@ -78,7 +70,7 @@ def validate_department(department):
 
     if department not in departments:
         valid = False
-        error_msg = f"Invalid department: {department}"
+        error_msg = f"Invalid department -> {department}"
 
     return valid, error_msg
 
@@ -108,11 +100,11 @@ def validate_onboarding_score(score):
 def validate_user(user):
     errors = []
 
-    valid, error_msg = validate_name(user["first-name"])
+    valid, error_msg = validate_name(user["first_name"])
     if not valid:
         errors.append(error_msg)
 
-    valid, error_msg = validate_name(user["last-name"])
+    valid, error_msg = validate_name(user["last_name"])
     if not valid:
         errors.append(error_msg)
 
@@ -124,7 +116,7 @@ def validate_user(user):
     if not valid:
         errors.append(error_msg)
 
-    valid, error_msg = validate_onboarding_score(user["onboarding-score"])
+    valid, error_msg = validate_onboarding_score(user["onboarding_score"])
     if not valid:
         errors.append(error_msg)
 
