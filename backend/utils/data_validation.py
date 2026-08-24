@@ -1,6 +1,14 @@
 import pandas as pd
 import re
 
+def standardise_user(user):
+    user["first-name"] = str(user["first-name"]).strip().title()
+    user["last-name"] = str(user["last-name"]).strip().title()
+    user["email"] = str(user["email"]).strip().lower()
+    user["department"] = str(user["department"]).strip().lower()
+
+    return user
+
 
 def validate_columns(file):
     required_columns = [
@@ -8,7 +16,7 @@ def validate_columns(file):
         "last-name",
         "email",
         "department",
-        "application-rating"
+        "onboarding-score"
     ]
 
     missing_columns = []
@@ -24,11 +32,11 @@ def validate_name(name):
     valid = True
     error_msg = ""
 
-    if not name or not name.strip():
+    if not name:
         valid = False 
         error_msg = "Name is required"
 
-    if not re.match(r"^[a-zA-Z\s'-]+$", name.strip()):
+    if not re.match(r"^[a-zA-Z\s'-]+$", name):
         valid = False
         error_msg = "Name contains invalid characters"
 
@@ -39,11 +47,10 @@ def validate_email(email):
     valid = True
     error_msg = ""
 
-    if not email or not email.strip():
+    if not email:
         valid = False
         error_msg = "Email is required"
 
-    email = email.strip()
     pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
 
     if not re.match(pattern, email):
@@ -65,35 +72,35 @@ def validate_department(department):
         "team resources"
     ]
 
-    if not department or not department.strip():
+    if not department:
         valid = False
         error_msg = "Department is required"
 
-    if department.strip() not in departments:
+    if department not in departments:
         valid = False
         error_msg = f"Invalid department: {department}"
 
     return valid, error_msg
 
 
-def validate_application_rating(rating):
+def validate_onboarding_score(score):
     valid = True
     error_msg = ""
 
-    if rating is None or str(rating).strip() == "":
+    if score is None or str(score).strip() == "":
         valid = False
-        error_msg = "Application rating is required"
+        error_msg = "Onboarding score is required"
 
     else:
         try:
-            rating = int(rating)
+            score = int(score)
         except ValueError:
             valid = False
-            error_msg = "Application rating must be a number"
+            error_msg = "Onboarding score must be a number"
         else:
-            if not 10 <= rating <= 30:
+            if not 10 <= score <= 30:
                 valid = False
-                error_msg = "Application rating must be between 10 and 30"
+                error_msg = "Onboarding score must be between 10 and 30"
 
     return valid, error_msg
 
@@ -117,7 +124,7 @@ def validate_user(user):
     if not valid:
         errors.append(error_msg)
 
-    valid, error_msg = validate_application_rating(user["application-rating"])
+    valid, error_msg = validate_onboarding_score(user["onboarding-score"])
     if not valid:
         errors.append(error_msg)
 
