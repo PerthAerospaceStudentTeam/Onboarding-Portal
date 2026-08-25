@@ -47,8 +47,8 @@ jobs:
         run: |
           az containerapp update \
             --name onboarding-portal-prod-backend \
-            --resource-group rg-onboarding-portal-prod \
-            --image onboardingportalprodacr.azurecr.io/backend:${{ github.sha }} 
+            --resource-group rg-portal-prod \
+            --image onboardingportalprodacr.azurecr.io/backend:${{ github.sha }}
 
   deploy-frontend:
     runs-on: ubuntu-latest
