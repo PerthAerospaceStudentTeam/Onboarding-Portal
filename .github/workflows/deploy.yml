@@ -1,6 +1,7 @@
 name: Deploy app changes
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
@@ -28,11 +29,13 @@ jobs:
       - name: Ensure containerapp CLI extension
         run: az extension add --name containerapp --upgrade
 
+      - name: Log in to ACR
+        run: az acr login --name onboardingportalprodacr
+
       - name: Build and push backend image
         run: |
-          az acr build --registry onboardingportalprodacr \
-            --image backend:${{ github.sha }} \
-            ./backend
+          docker build -t onboardingportalprodacr.azurecr.io/backend:${{ github.sha }} ./backend
+          docker push onboardingportalprodacr.azurecr.io/backend:${{ github.sha }}
 
       - name: Update Container App to new image
         run: |
