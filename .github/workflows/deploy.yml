@@ -18,7 +18,13 @@ jobs:
     environment: prod
     steps:
       - uses: actions/checkout@v4
-
+      
+      - name: Debug what the SP can see
+        run: |
+          az account show --query "{sub:name, subId:id, tenant:tenantId, user:user.name}" -o json
+          az group list --query "[].name" -o table
+          az containerapp list --query "[].{name:name, rg:resourceGroup}" -o table
+          
       - name: Azure Login (OIDC)
         uses: azure/login@v2
         with:
