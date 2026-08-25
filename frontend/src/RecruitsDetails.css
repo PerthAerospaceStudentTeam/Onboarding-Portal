@@ -1,0 +1,175 @@
+.recruit-details {
+  min-height: 100vh;
+  background-color: var(--color-white, #FFFFFF);
+  font-family: var(--font-family, 'Inter', sans-serif);
+}
+ 
+.recruit-details-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: var(--color-primary-blue, #1B3A6B);
+  padding: 28px 40px;
+}
+ 
+.recruit-details-header h1 {
+  color: var(--color-white, #FFFFFF);
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0;
+}
+ 
+.recruit-details-back {
+  background: none;
+  border: none;
+  color: var(--color-white, #FFFFFF);
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px;
+}
+ 
+.recruit-details-body {
+  background-color: var(--color-white, #FFFFFF);
+  max-width: 1440px;
+  padding: 32px 40px 48px;
+  margin-left: 24px;
+}
+ 
+.recruit-details-stage-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  border: 1px solid var(--color-gray, #B3B3B3);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-top: 24px;
+}
+ 
+.recruit-details-stage-info h2 {
+  font-size: 17px;
+  margin: 0 0 12px;
+}
+ 
+.recruit-details-email {
+  display: inline-block;
+  color: var(--color-text, #1f2937);
+  font-style: italic;
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+ 
+.recruit-details-department {
+  margin: 0;
+  color: var(--color-text, #1f2937);
+}
+ 
+.recruit-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+  margin-left:24px;
+  margin-right:24px;
+}
+ 
+.recruit-details-panel {
+  border: 1px solid var(--color-gray, #B3B3B3);
+  border-radius: 12px;
+  padding: 22px;
+}
+ 
+.recruit-details-panel h3 {
+  font-size: 15px;
+  color: var(--color-primary-blue, #1B3A6B);
+  margin: 0 0 14px;
+}
+ 
+.recruit-details-grades {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+ 
+.recruit-details-grade-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+ 
+.recruit-details-grade-input {
+  width: 64px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--color-gray, #B3B3B3);
+  background-color: var(--color-offwhite, #F5F5F5);
+  font-family: inherit;
+  font-size: 14px;
+  text-align: center;
+}
+ 
+.recruit-details-grade-input:focus {
+  outline: none;
+  border-color: var(--color-primary-blue, #1B3A6B);
+}
+ 
+.recruit-details-save {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+ 
+.recruit-details-save .btn {
+  min-width: 260px;
+  padding: 14px 0;
+}
+
+.recruit-details-status-success {
+  color: var(--color-success, #45AC3A);
+  font-size: 14px;
+}
+
+.recruit-details-status-error {
+  color: var(--color-error, #DC2626);
+  font-size: 14px;
+}
+
+.stage-select-trigger--default {
+  background-color: var(--color-gray, #B3B3B3);
+}
+.stage-select-trigger--info {
+  background-color: var(--color-info, #4FC3E8);
+}
+.stage-select-trigger--warning {
+  background-color: var(--color-button, #E8621A);
+}
+.stage-select-trigger--success {
+  background-color: var(--color-success, #45AC3A);
+}
+.stage-select-trigger--error {
+  background-color: var(--color-error, #DC2626);
+}
+.stage-select-trigger--basic {
+  background-color: var(--color-primary-blue, #1B3A6B);
+}
+ 
+@media (max-width: 800px) {
+  .recruit-details-grid {
+    grid-template-columns: 1fr;
+  }
+ 
+  .recruit-details-stage-card {
+    flex-direction: column;
+  }
+ 
+  .recruit-details-header,
+  .recruit-details-body {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

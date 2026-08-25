@@ -5,3 +5,5 @@ python-multipart==0.0.32
 supabase
 pandas
 re
+supabase==2.7.4
+
