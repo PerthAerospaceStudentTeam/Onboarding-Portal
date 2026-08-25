@@ -41,8 +41,15 @@ jobs:
         run: |
           az containerapp update \
             --name onboarding-portal-prod-backend \
-            --resource-group rg-portal-prod \
-            --image onboardingportalprodacr.azurecr.io/backend:${{ github.sha }}
+            --resource-group rg-onboarding-portal-prod \
+            --image onboardingportalprodacr.azurecr.io/backend:${{ github.sha }} \
+            --set-env-vars \
+              SUPABASE_URL=secretref:supabase-url \
+              SUPABASE_SERVICE_ROLE_KEY=secretref:supabase-key \
+              CORS_ORIGINS="https://purple-forest-0886ac500.7.azurestaticapps.net" \
+            --secrets \
+              supabase-url=${{ secrets.SUPABASE_URL }} \
+              supabase-key=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
 
   deploy-frontend:
     runs-on: ubuntu-latest
@@ -58,3 +65,5 @@ jobs:
           action: upload
           app_location: /frontend
           output_location: dist
+        env:
+          VITE_API_URL: https://onboarding-portal-prod-backend.agreeablebeach-800d7c0b.eastasia.azurecontainerapps.io

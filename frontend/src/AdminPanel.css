@@ -1,0 +1,104 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.admin-panel {
+    min-height: 100vh;
+    width: 100%;
+    background-color: var(--color-white, #FFFFFF);
+    font-family: var(--font-family, 'Inter', sans-serif);
+}
+
+.admin-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-primary-blue, #1B3A6B);
+    padding: 24px 40px;
+}
+
+.admin-panel-logo {
+    color: var(--color-white, #FFFFFF);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.admin-panel-account {
+    color: var(--color-white, #FFFFFF);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.admin-panel-avatar {
+    color: var(--color-info, #4FC3E8);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--color-info, #4FC3E8);
+    display: inline-block;
+}
+
+.admin-panel-body {
+    background-color: var(--color-white, #FFFFFF);
+    margin: 0 auto;
+    padding: 32px 40px 48px;
+    max-width: 1440px;
+    width: 100%;
+}
+
+.admin-panel-toolbar {
+    background-color: var(--color-white, #FFFFFF);
+    margin-top: 24px;
+    margin-right: 24px;
+}
+
+.admin-panel-filters {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 24px;
+    margin-left: 200px;
+    flex-wrap: wrap;
+}
+
+.admin-panel-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 24px;
+    margin-right: 135px;
+    border-radius: 10%;
+    margin-top: 12px;
+    margin-bottom: 24px;
+}
+
+.admin-panel-status {
+    text-align: center;
+    padding: 40px 12px;
+    color: var(--color-dark-gray, #9A9898);
+}
+
+.admin-panel-error {
+    color: var(--color-error, #DC2626);
+}
+
+@media (max-width: 900px) {
+    .admin-panel-header,
+    .admin-panel-body {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .admin-panel-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-panel-actions {
+        justify-content: flex-end;
+    }
+}
