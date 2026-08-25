@@ -1,5 +1,9 @@
 fastapi==0.115.12
 uvicorn[standard]==0.34.2
 pydantic-settings==2.9.1
+python-multipart==0.0.32
+supabase
+pandas
+re
 supabase==2.7.4
 
