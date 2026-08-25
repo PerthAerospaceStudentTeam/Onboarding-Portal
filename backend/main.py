@@ -18,14 +18,14 @@ app.add_middleware(
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "app_env": settings.app_env}
+    return {"status": "ok", "app_env": settings.app_env, "marker": "v2-debug"}
 
 @app.get("/health/supabase")
 def supabase_health():
     try:
         settings.require_supabase()
     except RuntimeError as e:
-        raise HTTPException(status_code=500, details=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
     
     url = f"{settings.supabase_url}/rest/v1/"
     try:
