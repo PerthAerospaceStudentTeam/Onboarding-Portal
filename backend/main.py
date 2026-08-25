@@ -16,11 +16,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/health")
-def health():
-    return {"status": "ok", "app_env": settings.app_env, "marker": "v2-debug"}
+# @app.get("/health")
+# def health():
+#     return {"status": "ok", "app_env": settings.app_env}
 
-@app.get("/health/supabase")
+@app.get("/health")
 def supabase_health():
     try:
         settings.require_supabase()
