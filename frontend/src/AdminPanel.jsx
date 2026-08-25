@@ -60,7 +60,7 @@ async function fetchCandidates() {
     return Promise.resolve(MOCK_RECRUITS);
 }
 
-export default function AdminPanel({ onViewCandidate }) {
+export default function AdminPanel({ onViewCandidate, onOpenEmailView }) {
     const [candidates, setCandidates] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -129,6 +129,10 @@ export default function AdminPanel({ onViewCandidate }) {
         return filteredRows.filter((r) => selectedIds.has(r.id)).length;
     }, [filteredRows, selectedIds]);
 
+    const selectedRecruits = useMemo(() => {
+        return candidates.filter((c) => selectedIds.has(c.id));
+    }, [candidates, selectedIds]);
+
     const columns = [
         { key: "name", header: "Candidate Name" },
         { key: "stage", header: "Stage", render: (row) => <Badge stage={row.stage}/> },
@@ -177,7 +181,11 @@ export default function AdminPanel({ onViewCandidate }) {
                     
                     <div className="admin-panel-actions">
                         <Button variant="accent">Share as</Button>
-                        <Button variant="action" disabled={visibleSelectedCount === 0}>
+                        <Button 
+                            variant="action" 
+                            disabled={visibleSelectedCount === 0} 
+                            onClick = {()=> onOpenEmailView?.(selectedRecruits)}
+                        >
                             Email ( {visibleSelectedCount} ) selected
                         </Button>
                     </div>
