@@ -16,11 +16,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Altered
 @app.get("/health")
 def health():
     return {"status": "ok", "app_env": settings.app_env}
 
+# Supabase connection check
 @app.get("/health/supabase")
 def supabase_health():
     try:
