@@ -2,6 +2,7 @@ import httpx
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from config import get_settings
+from api.user_import import router as user_import_router
 
 settings = get_settings()
 
