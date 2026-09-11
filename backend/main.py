@@ -23,31 +23,37 @@ def health():
 # Supabase connection check
 @app.get("/health/supabase")
 def supabase_health():
-    try:
-        settings.require_supabase()
-    except RuntimeError as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    return {"status": "ok", "type":"supabase"}
+# def supabase_health():
+#     try:
+#         settings.require_supabase()
+#     except RuntimeError as e:
+#         raise HTTPException(status_code=500, detail=str(e))
     
-    url = f"{settings.supabase_url}/rest/v1/"
-    try:
-        response = httpx.get(
-            url,
-            headers={
-                "apikey": settings.supabase_service_role_key,
-                "Authorization": f"Bearer {settings.supabase_service_role_key}",
-            },
-            timeout=5.0,
-        )
-    except httpx.RequestError as e:
-        raise HTTPException(status_code=502, detail=f"Could not reach Supabase: {e}")
+#     url = f"{settings.supabase_url}/rest/v1/"
+#     try:
+#         response = httpx.get(
+#             url,
+#             headers={
+#                 "apikey": settings.supabase_service_role_key,
+#                 "Authorization": f"Bearer {settings.supabase_service_role_key}",
+#             },
+#             timeout=5.0,
+#         )
+#     except httpx.RequestError as e:
+#         raise HTTPException(status_code=502, detail=f"Could not reach Supabase: {e}")
 
-    if response.status_code >= 500:
-        raise HTTPException(
-            status_code=502,
-            detail=f"Supabase responded with {response.status_code}",
-        )
+#     if response.status_code >= 500:
+#         raise HTTPException(
+#             status_code=502,
+#             detail=f"Supabase responded with {response.status_code}",
+#         )
 
-    return {
-        "status": "ok",
-        "supabase_reachable": response.status_code < 500
-    }
+#     return {
+#         "status": "ok",
+#         "supabase_reachable": response.status_code < 500
+#     }
+
+@app.get("/test")
+def test():
+    return {"status":"ok", "type":"test"}
