@@ -19,3 +19,11 @@ app.add_middleware(
 @app.get("/health")
 def health():
     return {"status": "ok", "app_env": settings.app_env}
+
+@app.get("/health/supabase")
+def supabase_health():
+    return {"status": "ok", "type":"supabase"}
+
+@app.get("/test")
+def test():
+    return {"status":"ok", "type":"test"}
