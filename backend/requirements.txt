@@ -4,5 +4,4 @@ pydantic-settings==2.9.1
 python-multipart==0.0.32
 supabase
 pandas
-supabase==2.7.4
 
