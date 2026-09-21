@@ -4,49 +4,15 @@ import { Dropdown } from "./components/Dropdown";
 import { Badge, STAGE_CONFIG } from "./components/Badge";
 import { Table } from "./components/Table";
 import { Input } from "./components/Input";
+import { getDashboardRecruits } from "./api/recruits";
 import "./AdminPanel.css";
-
-const MOCK_RECRUITS = [
-    {
-        id: 1,
-        name: "Recruit 1",
-        email: "recruit1@student.edu.curtin.au",
-        team: "Mechanical",
-        stage: "applied",
-        attendance: 85
-    },
-    {
-        id: 2,
-        name: "Recruit 2",
-        email: "recruit2@student.edu.curtin.au",
-        team: "Software",
-        stage: "onboarding",
-        attendance: 80
-    },
-    {
-        id: 3,
-        name: "Recruit 3",
-        email: "recruit3@student.edu.curtin.au",
-        team: "ADCS",
-        stage: "onboarding",
-        attendance: 90
-    },
-    {
-        id: 4,
-        name: "Recruit 4",
-        email: "recruit4@student.edu.curtin.au",
-        team: "Marketing",
-        stage: "interview",
-        attendance: 90
-    },
-];
 
 const TEAMS = [
     { value: "software", label: "Software" },
     { value: "mechanical", label: "Mechanical" },
     { value: "avionics", label: "Avionics" },
     { value: "marketing", label: "Marketing" },
-    { value: "ADCS", label: "ADCS"},
+    { value: "adcs", label: "ADCS"},
     { value: "team dev", label: "Team Dev"}
 ];
 
@@ -55,10 +21,6 @@ const STAGE = STAGE_CONFIG
     value,
     label: config.label
 })) : [];
-
-async function fetchCandidates() {
-    return Promise.resolve(MOCK_RECRUITS);
-}
 
 export default function AdminPanel({ onViewCandidate, onOpenEmailView }) {
     const [candidates, setCandidates] = useState([]);
@@ -75,10 +37,16 @@ export default function AdminPanel({ onViewCandidate, onOpenEmailView }) {
             setLoading(true);
             setError(null);
             try {   
-                const data = await fetchCandidates();
-                if (!cancelled) setCandidates(data ?? []);
+                const data = await getDashboardRecruits();
+                // Normalize stage lowercase for badge/filter matching safety
+                const normalized = (data ?? []).map((c) => ({
+                    ...c,
+                    stage: c.stage?.toLowerCase() ?? "",
+                    team: c.team ?? ""
+                }));
+                if (!cancelled) setCandidates(normalized);
             } catch(error) {
-                if (!cancelled) setError(error?.message || "An error occurred.");
+                if (!cancelled) setError(error?.message || "Failed to load dashboard recruits.");
             } finally {
                 if (!cancelled) setLoading(false);
             }
@@ -95,7 +63,7 @@ export default function AdminPanel({ onViewCandidate, onOpenEmailView }) {
         return candidates.filter((c) => {
             const matchesSearch = !query || c.name?.toLowerCase().includes(query);
             const matchesTeam = !teamFilter || c.team?.toLowerCase() === teamFilter.toLowerCase();
-            const matchesStage = !stageFilter || c.stage === stageFilter;
+            const matchesStage = !stageFilter || c.stage === stageFilter.toLowerCase();
             return matchesSearch && matchesTeam && matchesStage;
         });
     }, [candidates, search, teamFilter, stageFilter]);
