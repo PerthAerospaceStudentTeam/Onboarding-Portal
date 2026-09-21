@@ -4,42 +4,8 @@ import { Dropdown } from "./components/Dropdown";
 import { Badge, STAGE_CONFIG } from "./components/Badge";
 import { Table } from "./components/Table";
 import { Input } from "./components/Input";
+import { getRecruits } from "./api/recruits";
 import "./AdminPanel.css";
-
-const MOCK_RECRUITS = [
-    {
-        id: 1,
-        name: "Recruit 1",
-        email: "recruit1@student.edu.curtin.au",
-        team: "Mechanical",
-        stage: "applied",
-        attendance: 85
-    },
-    {
-        id: 2,
-        name: "Recruit 2",
-        email: "recruit2@student.edu.curtin.au",
-        team: "Software",
-        stage: "onboarding",
-        attendance: 80
-    },
-    {
-        id: 3,
-        name: "Recruit 3",
-        email: "recruit3@student.edu.curtin.au",
-        team: "ADCS",
-        stage: "onboarding",
-        attendance: 90
-    },
-    {
-        id: 4,
-        name: "Recruit 4",
-        email: "recruit4@student.edu.curtin.au",
-        team: "Marketing",
-        stage: "interview",
-        attendance: 90
-    },
-];
 
 const TEAMS = [
     { value: "software", label: "Software" },
@@ -56,10 +22,6 @@ const STAGE = STAGE_CONFIG
     label: config.label
 })) : [];
 
-async function fetchCandidates() {
-    return Promise.resolve(MOCK_RECRUITS);
-}
-
 export default function AdminPanel({ onViewCandidate, onOpenEmailView }) {
     const [candidates, setCandidates] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -75,7 +37,7 @@ export default function AdminPanel({ onViewCandidate, onOpenEmailView }) {
             setLoading(true);
             setError(null);
             try {   
-                const data = await fetchCandidates();
+                const data = await getRecruits();
                 if (!cancelled) setCandidates(data ?? []);
             } catch(error) {
                 if (!cancelled) setError(error?.message || "An error occurred.");
