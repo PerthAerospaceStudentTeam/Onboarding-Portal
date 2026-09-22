@@ -4,7 +4,11 @@ import { Dropdown } from "./components/Dropdown";
 import { Badge, STAGE_CONFIG } from "./components/Badge";
 import { Table } from "./components/Table";
 import { Input } from "./components/Input";
+<<<<<<< HEAD
 import { getRecruits } from "./api/recruits";
+=======
+import { getDashboardRecruits } from "./api/recruits";
+>>>>>>> origin/development
 import "./AdminPanel.css";
 
 const TEAMS = [
@@ -12,7 +16,7 @@ const TEAMS = [
     { value: "mechanical", label: "Mechanical" },
     { value: "avionics", label: "Avionics" },
     { value: "marketing", label: "Marketing" },
-    { value: "ADCS", label: "ADCS"},
+    { value: "adcs", label: "ADCS"},
     { value: "team dev", label: "Team Dev"}
 ];
 
@@ -37,10 +41,21 @@ export default function AdminPanel({ onViewCandidate, onOpenEmailView }) {
             setLoading(true);
             setError(null);
             try {   
+<<<<<<< HEAD
                 const data = await getRecruits();
                 if (!cancelled) setCandidates(data ?? []);
+=======
+                const data = await getDashboardRecruits();
+                // Normalize stage lowercase for badge/filter matching safety
+                const normalized = (data ?? []).map((c) => ({
+                    ...c,
+                    stage: c.stage?.toLowerCase() ?? "",
+                    team: c.team ?? ""
+                }));
+                if (!cancelled) setCandidates(normalized);
+>>>>>>> origin/development
             } catch(error) {
-                if (!cancelled) setError(error?.message || "An error occurred.");
+                if (!cancelled) setError(error?.message || "Failed to load dashboard recruits.");
             } finally {
                 if (!cancelled) setLoading(false);
             }
@@ -57,7 +72,7 @@ export default function AdminPanel({ onViewCandidate, onOpenEmailView }) {
         return candidates.filter((c) => {
             const matchesSearch = !query || c.name?.toLowerCase().includes(query);
             const matchesTeam = !teamFilter || c.team?.toLowerCase() === teamFilter.toLowerCase();
-            const matchesStage = !stageFilter || c.stage === stageFilter;
+            const matchesStage = !stageFilter || c.stage === stageFilter.toLowerCase();
             return matchesSearch && matchesTeam && matchesStage;
         });
     }, [candidates, search, teamFilter, stageFilter]);
