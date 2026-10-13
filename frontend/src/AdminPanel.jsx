@@ -4,7 +4,11 @@ import { Dropdown } from "./components/Dropdown";
 import { Badge, STAGE_CONFIG } from "./components/Badge";
 import { Table } from "./components/Table";
 import { Input } from "./components/Input";
+<<<<<<< HEAD
+import { getRecruits } from "./api/recruits";
+=======
 import { getDashboardRecruits } from "./api/recruits";
+>>>>>>> origin/development
 import "./AdminPanel.css";
 
 const TEAMS = [
@@ -37,6 +41,10 @@ export default function AdminPanel({ onViewCandidate, onOpenEmailView }) {
             setLoading(true);
             setError(null);
             try {   
+<<<<<<< HEAD
+                const data = await getRecruits();
+                if (!cancelled) setCandidates(data ?? []);
+=======
                 const data = await getDashboardRecruits();
                 // Normalize stage lowercase for badge/filter matching safety
                 const normalized = (data ?? []).map((c) => ({
@@ -45,6 +53,7 @@ export default function AdminPanel({ onViewCandidate, onOpenEmailView }) {
                     team: c.team ?? ""
                 }));
                 if (!cancelled) setCandidates(normalized);
+>>>>>>> origin/development
             } catch(error) {
                 if (!cancelled) setError(error?.message || "Failed to load dashboard recruits.");
             } finally {
