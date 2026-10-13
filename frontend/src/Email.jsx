@@ -39,6 +39,7 @@ export default function SendEmailView({ selectedRecruits = [], onBack }) {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [sending, setSending] = useState(false);
+  const [copied, setCopied] = useState(false); // Tracks copy button status
 
   useEffect(() => {
     if (!selectedTemplate) return;
@@ -53,18 +54,38 @@ export default function SendEmailView({ selectedRecruits = [], onBack }) {
     setRecipients((prev) => prev.filter((r) => r.id !== id));
   }
 
-  async function handleSendAll() {
+  // Copy all recipient emails to clipboard for manual pasting 
+  function handleCopyBcc() {
+    if (recipients.length === 0) return;
+    const bccList = recipients.map((r) => r.email).join(", ");
+    navigator.clipboard.writeText(bccList);
+    
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  }
+
+  // Opens the native desktop email app with pre-filled Subject, and Body
+  function handleSendAll() {
+    if (recipients.length === 0) return;
+
     setSending(true);
+
     try {
-      const emailPayload = {
-        to: recipients.map((r) => r.email),
-        subject,
-        message
-      };
-      alert(`Emails sent to ${recipients.length} recruits!`);
+      const emailList = recipients.map((r) => r.email).join(",");
+      const encodedSubject = encodeURIComponent(subject);
+      const encodedBody = encodeURIComponent(message);
+
+      // Using bcc= keeps recipient emails hidden from each other
+      const mailtoUrl = `mailto:?bcc=${emailList}&subject=${encodedSubject}&body=${encodedBody}`;
+
+      // Open email client
+      window.location.href = mailtoUrl;
+
+      // Return back to admin list
       onBack();
     } catch (err) {
-      console.error("Failed to send emails", err);
+      console.error("Failed to open email client", err);
+      alert("Failed to open default email application.");
     } finally {
       setSending(false);
     }
@@ -84,7 +105,6 @@ export default function SendEmailView({ selectedRecruits = [], onBack }) {
       </header>
 
       <main className="send-email-body">
-        {/* Recipients Bar */}
         <div className="send-email-card recipients-card">
           <div className="recipients-left">
             <span className="recipients-title">
@@ -143,18 +163,26 @@ export default function SendEmailView({ selectedRecruits = [], onBack }) {
           />
         </div>
 
-        <div className="send-email-actions">
+        <div className="send-email-actions" style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={handleCopyBcc}
+            disabled={recipients.length === 0}
+          >
+            {copied ? "Copied Emails!" : "Copy Emails (BCC)"}
+          </Button>
+
           <Button
             variant="accent"
             onClick={handleSendAll}
             disabled={sending || recipients.length === 0}
             className="send-all-btn"
           >
-            {sending ? "Sending" : "Send All"}
+            {sending ? "Opening..." : "Open in Email Client"}
           </Button>
         </div>
       </main>
     </div>
   );
 }
-
