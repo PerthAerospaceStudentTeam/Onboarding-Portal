@@ -4,11 +4,7 @@ import { Dropdown } from "./components/Dropdown";
 import { Badge, STAGE_CONFIG } from "./components/Badge";
 import { Table } from "./components/Table";
 import { Input } from "./components/Input";
-<<<<<<< HEAD
-import { getRecruits } from "./api/recruits";
-=======
 import { getDashboardRecruits } from "./api/recruits";
->>>>>>> origin/development
 import "./AdminPanel.css";
 
 const TEAMS = [
@@ -41,19 +37,13 @@ export default function AdminPanel({ onViewCandidate, onOpenEmailView }) {
             setLoading(true);
             setError(null);
             try {   
-<<<<<<< HEAD
-                const data = await getRecruits();
-                if (!cancelled) setCandidates(data ?? []);
-=======
                 const data = await getDashboardRecruits();
-                // Normalize stage lowercase for badge/filter matching safety
                 const normalized = (data ?? []).map((c) => ({
                     ...c,
                     stage: c.stage?.toLowerCase() ?? "",
                     team: c.team ?? ""
                 }));
                 if (!cancelled) setCandidates(normalized);
->>>>>>> origin/development
             } catch(error) {
                 if (!cancelled) setError(error?.message || "Failed to load dashboard recruits.");
             } finally {
@@ -161,7 +151,7 @@ export default function AdminPanel({ onViewCandidate, onOpenEmailView }) {
                         <Button 
                             variant="action" 
                             disabled={visibleSelectedCount === 0} 
-                            onClick = {()=> onOpenEmailView?.(selectedRecruits)}
+                            onClick={() => onOpenEmailView?.(selectedRecruits)}
                         >
                             Email ( {visibleSelectedCount} ) selected
                         </Button>
@@ -179,7 +169,7 @@ export default function AdminPanel({ onViewCandidate, onOpenEmailView }) {
                         candidates={filteredRows}
                         selectedIds={Array.from(selectedIds)}
                         onToggleSelect={toggleRow}
-                        onViewDetails={(id)=> onViewCandidate?.(id)}
+                        onViewDetails={(id) => onViewCandidate?.(id)}
                     />
                 )}
             </main>
